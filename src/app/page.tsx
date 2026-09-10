@@ -4,28 +4,14 @@ import { products } from "@/data/products";
 import { ProductCard } from "@/components/ProductCard";
 import { FeaturedBrands } from "@/components/FeaturedBrands";
 import { PromoBanners } from "@/components/PromoBanners";
-import { STORE } from "@/lib/config";
+import { HeroCarousel } from "@/components/HeroCarousel";
 
 export default function Home() {
   const destacados = products.slice(0, 8);
 
   return (
     <div className="flex flex-col">
-      <section className="border-b border-black/10 bg-neutral-50 px-4 py-20 text-center">
-        <h1 className="mx-auto max-w-2xl text-4xl font-bold tracking-tight sm:text-5xl">
-          {STORE.name}
-        </h1>
-        <p className="mx-auto mt-4 max-w-xl text-black/60">
-          Belleza, salud y cuidado personal, y ropa mujer — todo en un solo
-          lugar, con envíos en Venezuela.
-        </p>
-        <Link
-          href="/productos"
-          className="mt-8 inline-block rounded-full bg-black px-6 py-3 text-sm font-semibold text-white hover:bg-black/80"
-        >
-          Ver catálogo
-        </Link>
-      </section>
+      <HeroCarousel />
 
       <PromoBanners />
 
