@@ -7,24 +7,9 @@ export const categories: Category[] = [
     description: "Maquillaje, skincare y accesorios de belleza.",
   },
   {
-    slug: "tecnologia",
-    name: "Tecnología",
-    description: "Gadgets y accesorios tecnológicos.",
-  },
-  {
-    slug: "cuidado-personal",
-    name: "Cuidado personal",
-    description: "Higiene y bienestar diario.",
-  },
-  {
-    slug: "salud-y-bienestar",
-    name: "Salud y bienestar",
-    description: "Suplementos y productos para tu rendimiento y salud.",
-  },
-  {
-    slug: "curiosidades",
-    name: "Curiosidades",
-    description: "Productos únicos y fuera de lo común.",
+    slug: "salud-y-cuidado-personal",
+    name: "Salud y cuidado personal",
+    description: "Suplementos, higiene y bienestar diario.",
   },
   {
     slug: "ropa-mujer",

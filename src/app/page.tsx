@@ -3,6 +3,7 @@ import { categories } from "@/data/categories";
 import { products } from "@/data/products";
 import { ProductCard } from "@/components/ProductCard";
 import { FeaturedBrands } from "@/components/FeaturedBrands";
+import { PromoBanners } from "@/components/PromoBanners";
 import { STORE } from "@/lib/config";
 
 export default function Home() {
@@ -15,8 +16,8 @@ export default function Home() {
           {STORE.name}
         </h1>
         <p className="mx-auto mt-4 max-w-xl text-black/60">
-          Belleza, tecnología, cuidado personal, salud y curiosidades — todo
-          en un solo lugar, con envíos en Venezuela.
+          Belleza, salud y cuidado personal, y ropa mujer — todo en un solo
+          lugar, con envíos en Venezuela.
         </p>
         <Link
           href="/productos"
@@ -25,6 +26,8 @@ export default function Home() {
           Ver catálogo
         </Link>
       </section>
+
+      <PromoBanners />
 
       <FeaturedBrands />
 

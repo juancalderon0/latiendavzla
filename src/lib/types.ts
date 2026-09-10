@@ -1,9 +1,6 @@
 export type CategorySlug =
   | "belleza"
-  | "tecnologia"
-  | "cuidado-personal"
-  | "curiosidades"
-  | "salud-y-bienestar"
+  | "salud-y-cuidado-personal"
   | "ropa-mujer";
 
 export interface Category {

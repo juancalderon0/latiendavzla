@@ -30,7 +30,7 @@ export default function OpengraphImage() {
           {STORE.name}
         </div>
         <div style={{ fontSize: 32, color: "#a3a3a3", marginTop: 20 }}>
-          Belleza · Tecnología · Cuidado personal · Salud · Curiosidades
+          Belleza · Salud y cuidado personal · Ropa mujer
         </div>
       </div>
     ),

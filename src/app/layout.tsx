@@ -17,9 +17,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: `${STORE.name} — Belleza, tecnología y más`,
+  title: `${STORE.name} — Belleza, salud y ropa`,
   description:
-    "Belleza, tecnología, cuidado personal, salud y curiosidades en Venezuela.",
+    "Belleza, salud y cuidado personal, y ropa mujer, con envíos en Venezuela.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

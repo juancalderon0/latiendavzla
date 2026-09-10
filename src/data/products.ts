@@ -5,7 +5,7 @@ export const products: Product[] = [
     slug: "mindfuel",
     name: "Mindfuel",
     brand: "Mindfuel",
-    category: "salud-y-bienestar",
+    category: "salud-y-cuidado-personal",
     priceUsd: 75,
     shortDescription:
       "Bebida nootrópica con Melena de León para enfoque y energía sostenida, sin azúcar ni cafeína.",

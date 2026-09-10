@@ -24,7 +24,7 @@ const brands = [
     name: "Mindfuel",
     tagline: "Nootrópicos y bienestar",
     image: "/products/mindfuel.png",
-    href: "/productos?categoria=salud-y-bienestar",
+    href: "/productos?categoria=salud-y-cuidado-personal",
   },
 ];
 
