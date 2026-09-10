@@ -8,6 +8,7 @@ import { formatUsd } from "@/lib/format";
 import { manualPaymentMethods } from "@/lib/payments/manual";
 import { STORE } from "@/lib/config";
 import { FreeShippingBanner } from "@/components/FreeShippingBanner";
+import { getShippingLabel, isFreeShipping } from "@/lib/shipping";
 
 export default function CheckoutPage() {
   const { lines, totalUsd, clear } = useCart();
@@ -75,7 +76,8 @@ export default function CheckoutPage() {
         (l) => `- ${l.item.name} x${l.item.quantity} — ${formatUsd(l.item.priceUsd * l.item.quantity)}`
       ),
       "",
-      `Total: ${formatUsd(totalUsd)}`,
+      `Subtotal (productos): ${formatUsd(totalUsd)}`,
+      `Envío: ${isFreeShipping(totalUsd) ? "Gratis" : "Por confirmar según dirección"}`,
       `Método de pago: ${method!.name}`,
       "",
       `Nombre: ${name}`,
@@ -210,10 +212,27 @@ export default function CheckoutPage() {
             </div>
           ))}
         </div>
-        <div className="mt-4 flex items-center justify-between border-t border-black/10 pt-4 text-lg font-bold">
-          <span>Total</span>
+        <div className="mt-4 flex flex-col gap-2 border-t border-black/10 pt-4 text-sm">
+          <div className="flex justify-between">
+            <span className="text-black/60">Subtotal (productos)</span>
+            <span>{formatUsd(totalUsd)}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-black/60">Envío</span>
+            <span className={isFreeShipping(totalUsd) ? "font-medium text-green-700" : "text-right text-black/70"}>
+              {getShippingLabel(totalUsd)}
+            </span>
+          </div>
+        </div>
+        <div className="mt-2 flex items-center justify-between border-t border-black/10 pt-4 text-lg font-bold">
+          <span>Total{!isFreeShipping(totalUsd) && " (sin envío)"}</span>
           <span>{formatUsd(totalUsd)}</span>
         </div>
+        {!isFreeShipping(totalUsd) && (
+          <p className="mt-1 text-xs text-black/50">
+            El costo de envío se suma aparte y te lo confirmamos por WhatsApp según tu dirección.
+          </p>
+        )}
 
         <div className="mt-4 flex items-center justify-center gap-2 rounded-lg border border-green-200 bg-green-50 py-2 text-sm font-medium text-green-700">
           <span>🛡️</span>
