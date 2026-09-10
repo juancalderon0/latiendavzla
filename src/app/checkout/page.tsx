@@ -83,7 +83,7 @@ export default function CheckoutPage() {
       `Dirección de entrega: ${address}`,
       "",
       "Adjunto el comprobante de pago.",
-      ...(orderId ? ["", `Confirmar en el panel: ${window.location.origin}/admin/pedidos/${orderId}`] : []),
+      ...(orderId ? ["", `Uso exclusivo para la tienda: ${window.location.origin}/admin/pedidos/${orderId}`] : []),
     ].join("\n");
 
     const whatsappHref = `https://wa.me/${STORE.whatsapp}?text=${encodeURIComponent(orderText)}`;
