@@ -9,8 +9,11 @@ export function Testimonials() {
         <div className="overflow-hidden rounded-2xl border border-black/10 bg-black">
           <video
             src="/testimonios/mindfuel-valentina.mp4"
-            controls
+            autoPlay
+            muted
+            loop
             playsInline
+            controls
             className="aspect-[9/16] w-full object-cover"
           />
           <div className="p-3 text-sm text-white">

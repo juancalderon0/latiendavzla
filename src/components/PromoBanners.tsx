@@ -10,7 +10,7 @@ export function PromoBanners() {
         <div>
           <h3 className="text-xl font-bold sm:text-2xl">Paga como prefieras</h3>
           <p className="mt-1 text-sm text-white/70">
-            Pago Móvil · Zelle · Binance Pay · Transferencia bancaria
+            Pago Móvil · Zelle · Binance Pay · Transferencia bancaria · Cashea (próximamente)
           </p>
         </div>
         <span className="shrink-0 rounded-full bg-white px-5 py-2 text-sm font-semibold text-black">
