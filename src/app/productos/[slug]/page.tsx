@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProductBySlug } from "@/lib/products-db";
 import { getCategory } from "@/data/categories";
@@ -56,6 +57,15 @@ export default async function ProductoPage({
         </div>
 
         <AddToCartButton product={product} />
+
+        {(product.category === "ropa-mujer" || product.category === "fajas") && (
+          <Link
+            href="/guia-tallas"
+            className="inline-block w-fit text-sm font-medium text-black/70 underline hover:text-black"
+          >
+            📏 Ver guía de tallas
+          </Link>
+        )}
 
         <div className="mt-4 space-y-4 border-t border-black/10 pt-4 text-sm">
           <p>{product.description}</p>

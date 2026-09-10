@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
 import { formatUsd } from "@/lib/format";
@@ -167,6 +168,17 @@ export default function CheckoutPage() {
                 <span className="pl-6 text-black/60">{m.description}</span>
               </label>
             ))}
+
+            <div className="flex cursor-not-allowed items-center gap-3 rounded-lg border border-black/10 bg-black/5 p-3 text-sm opacity-70">
+              <Image src="/cashea-logo.png" alt="Cashea" width={70} height={24} className="shrink-0" />
+              <div className="flex-1">
+                <div className="font-medium">Compra ahora, paga después</div>
+                <div className="text-black/50">En cuotas sin interés con Cashea</div>
+              </div>
+              <span className="shrink-0 rounded-full bg-black/10 px-2 py-1 text-xs font-medium text-black/60">
+                Próximamente
+              </span>
+            </div>
           </div>
 
           {method && (

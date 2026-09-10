@@ -6,6 +6,7 @@ import { Header } from "@/components/Header";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { SocialLinks } from "@/components/SocialLinks";
 import { StorefrontOnly } from "@/components/StorefrontOnly";
+import Link from "next/link";
 import { STORE } from "@/lib/config";
 
 const geistSans = Geist({
@@ -45,7 +46,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               <div className="mb-4">
                 <SocialLinks />
               </div>
-              © {new Date().getFullYear()} {STORE.name}. Todos los derechos reservados.
+              © {new Date().getFullYear()} {STORE.name}. Todos los derechos reservados.{" "}
+              <Link href="/admin/login" aria-label="Administración" className="text-black/10 hover:text-black/30">
+                ·
+              </Link>
             </footer>
             <WhatsAppButton />
           </StorefrontOnly>
