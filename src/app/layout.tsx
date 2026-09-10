@@ -46,10 +46,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               <div className="mb-4">
                 <SocialLinks />
               </div>
-              © {new Date().getFullYear()} {STORE.name}. Todos los derechos reservados.{" "}
-              <Link href="/admin/login" aria-label="Administración" className="text-black/10 hover:text-black/30">
-                ·
-              </Link>
+              © {new Date().getFullYear()} {STORE.name}. Todos los derechos reservados.
+              <div className="mt-2">
+                <Link href="/admin/login" className="text-black/40 hover:text-black/70 underline">
+                  Administración
+                </Link>
+              </div>
             </footer>
             <WhatsAppButton />
           </StorefrontOnly>
