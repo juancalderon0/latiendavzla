@@ -8,6 +8,9 @@ export const STORE = {
   currency: "USD",
 };
 
+// Umbral de compra para envío gratis (USD).
+export const FREE_SHIPPING_THRESHOLD = 50;
+
 // Datos para pago móvil manual — edita con tus datos bancarios reales.
 export const PAGO_MOVIL = {
   banco: "Banco de Venezuela",

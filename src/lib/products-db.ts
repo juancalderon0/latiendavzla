@@ -2,6 +2,7 @@ import { query } from "@/lib/db";
 import { Product } from "@/lib/types";
 
 interface ProductRow {
+  id: number;
   slug: string;
   name: string;
   brand: string;
@@ -25,6 +26,7 @@ function toProduct(row: ProductRow): Product {
     : basePrice;
 
   return {
+    id: row.id,
     slug: row.slug,
     name: row.name,
     brand: row.brand,
@@ -41,7 +43,7 @@ function toProduct(row: ProductRow): Product {
 }
 
 const SELECT_FIELDS = `
-  slug, name, brand, category, price_usd, active_discount_pct,
+  id, slug, name, brand, category, price_usd, active_discount_pct,
   short_description, description, highlights, image, origin, in_stock, stock_qty
 `;
 

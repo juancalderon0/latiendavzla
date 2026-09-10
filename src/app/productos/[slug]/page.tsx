@@ -6,6 +6,7 @@ import { getCategory } from "@/data/categories";
 import { formatUsd } from "@/lib/format";
 import { getBcvRate, formatBs } from "@/lib/bcv";
 import { AddToCartButton } from "@/components/AddToCartButton";
+import { ProductReviews } from "@/components/ProductReviews";
 
 export const dynamic = "force-dynamic";
 
@@ -78,7 +79,29 @@ export default async function ProductoPage({
           {!product.inStock && (
             <p className="font-medium text-red-600">Agotado momentáneamente</p>
           )}
+
+          {product.category === "joyas" && (
+            <div className="flex items-start gap-2 rounded-lg bg-amber-50 p-3 text-amber-800">
+              <span>✅</span>
+              <span>
+                <strong>Certificado de autenticidad incluido</strong> — pieza en metal real
+                (oro 18k o plata 925), verificada por el proveedor.
+              </span>
+            </div>
+          )}
+
+          {(product.category === "ropa-mujer" || product.category === "fajas") && (
+            <div className="flex items-start gap-2 rounded-lg bg-neutral-50 p-3 text-black/60">
+              <span>ℹ️</span>
+              <span>
+                Por higiene, esta prenda <strong>no admite devoluciones</strong> una vez
+                abierto el empaque o usada, salvo defecto de fábrica.
+              </span>
+            </div>
+          )}
         </div>
+
+        <ProductReviews productId={product.id} />
       </div>
     </div>
   );

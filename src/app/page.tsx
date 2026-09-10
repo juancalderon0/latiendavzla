@@ -6,6 +6,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { FeaturedBrands } from "@/components/FeaturedBrands";
 import { PromoBanners } from "@/components/PromoBanners";
 import { HeroCarousel } from "@/components/HeroCarousel";
+import { Testimonials } from "@/components/Testimonials";
 
 export const dynamic = "force-dynamic";
 
@@ -20,6 +21,8 @@ export default async function Home() {
       <PromoBanners />
 
       <FeaturedBrands />
+
+      <Testimonials />
 
       <section className="mx-auto w-full max-w-6xl px-4 pb-12">
         <h2 className="mb-6 text-lg font-semibold">Categorías</h2>

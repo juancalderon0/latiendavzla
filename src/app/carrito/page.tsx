@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
 import { formatUsd } from "@/lib/format";
+import { FreeShippingBanner } from "@/components/FreeShippingBanner";
 
 export default function CarritoPage() {
   const { lines, totalUsd, setQuantity, removeItem } = useCart();
@@ -79,7 +80,8 @@ export default function CarritoPage() {
         </div>
       </div>
 
-      <div className="h-fit rounded-xl border border-black/10 p-6">
+      <div className="flex h-fit flex-col gap-4 rounded-xl border border-black/10 p-6">
+        <FreeShippingBanner totalUsd={totalUsd} />
         <div className="flex items-center justify-between text-lg font-bold">
           <span>Total</span>
           <span>{formatUsd(totalUsd)}</span>

@@ -7,6 +7,7 @@ import { useCart } from "@/lib/cart-context";
 import { formatUsd } from "@/lib/format";
 import { manualPaymentMethods } from "@/lib/payments/manual";
 import { STORE } from "@/lib/config";
+import { FreeShippingBanner } from "@/components/FreeShippingBanner";
 
 export default function CheckoutPage() {
   const { lines, totalUsd, clear } = useCart();
@@ -196,6 +197,9 @@ export default function CheckoutPage() {
 
       <div className="h-fit rounded-xl border border-black/10 p-6">
         <h2 className="mb-4 font-semibold">Resumen</h2>
+        <div className="mb-4">
+          <FreeShippingBanner totalUsd={totalUsd} />
+        </div>
         <div className="flex flex-col gap-2 text-sm">
           {lines.map((l) => (
             <div key={l.item.slug} className="flex justify-between">
@@ -209,6 +213,11 @@ export default function CheckoutPage() {
         <div className="mt-4 flex items-center justify-between border-t border-black/10 pt-4 text-lg font-bold">
           <span>Total</span>
           <span>{formatUsd(totalUsd)}</span>
+        </div>
+
+        <div className="mt-4 flex items-center justify-center gap-2 rounded-lg border border-green-200 bg-green-50 py-2 text-sm font-medium text-green-700">
+          <span>🛡️</span>
+          <span>Compra 100% segura</span>
         </div>
 
         {canConfirm ? (

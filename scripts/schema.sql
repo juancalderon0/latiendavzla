@@ -98,6 +98,17 @@ ALTER TABLE orders ADD COLUMN IF NOT EXISTS seller_id INTEGER REFERENCES sellers
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS commission_usd NUMERIC(10,2);
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS commission_paid BOOLEAN NOT NULL DEFAULT false;
 
+CREATE TABLE IF NOT EXISTS reviews (
+  id SERIAL PRIMARY KEY,
+  product_id INTEGER NOT NULL REFERENCES products(id),
+  customer_name TEXT NOT NULL,
+  rating INTEGER NOT NULL CHECK (rating BETWEEN 1 AND 5),
+  comment TEXT,
+  approved BOOLEAN NOT NULL DEFAULT false,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS idx_reviews_product ON reviews(product_id);
+
 CREATE TABLE IF NOT EXISTS settings (
   key TEXT PRIMARY KEY,
   value TEXT NOT NULL,
