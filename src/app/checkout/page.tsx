@@ -159,6 +159,21 @@ export default function CheckoutPage() {
           con tu pedido por WhatsApp. Tu pedido queda confirmado cuando
           verifiquemos el pago.
         </p>
+
+        <div className="mt-6 flex flex-col gap-2 border-t border-black/10 pt-4 text-xs text-black/60">
+          <div className="flex items-center gap-2">
+            <span>🔒</span>
+            <span>Pago verificado manualmente por nosotros</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span>🚚</span>
+            <span>Envíos a toda Venezuela</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span>💬</span>
+            <span>Atención directa por WhatsApp</span>
+          </div>
+        </div>
       </div>
     </div>
   );

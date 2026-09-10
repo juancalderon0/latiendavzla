@@ -31,7 +31,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col bg-white text-black">
         <CartProvider>
           <Header />
-          <main className="flex flex-1 flex-col">{children}</main>
+          <main className="flex flex-1 flex-col pb-20 sm:pb-0">{children}</main>
           <footer className="border-t border-black/10 py-8 text-center text-xs text-black/50">
             <a
               href={STORE.instagram}

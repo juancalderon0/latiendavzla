@@ -2,9 +2,12 @@ import Link from "next/link";
 import { categories } from "@/data/categories";
 import { products } from "@/data/products";
 import { ProductCard } from "@/components/ProductCard";
+import { FeaturedBrands } from "@/components/FeaturedBrands";
 import { STORE } from "@/lib/config";
 
 export default function Home() {
+  const destacados = products.slice(0, 8);
+
   return (
     <div className="flex flex-col">
       <section className="border-b border-black/10 bg-neutral-50 px-4 py-20 text-center">
@@ -23,9 +26,11 @@ export default function Home() {
         </Link>
       </section>
 
-      <section className="mx-auto w-full max-w-6xl px-4 py-12">
+      <FeaturedBrands />
+
+      <section className="mx-auto w-full max-w-6xl px-4 pb-12">
         <h2 className="mb-6 text-lg font-semibold">Categorías</h2>
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-6">
           {categories.map((c) => (
             <Link
               key={c.slug}
@@ -39,9 +44,14 @@ export default function Home() {
       </section>
 
       <section className="mx-auto w-full max-w-6xl px-4 pb-16">
-        <h2 className="mb-6 text-lg font-semibold">Destacados</h2>
+        <div className="mb-6 flex items-center justify-between">
+          <h2 className="text-lg font-semibold">Destacados</h2>
+          <Link href="/productos" className="text-sm font-medium hover:underline">
+            Ver todo
+          </Link>
+        </div>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
-          {products.map((p) => (
+          {destacados.map((p) => (
             <ProductCard key={p.slug} product={p} />
           ))}
         </div>
