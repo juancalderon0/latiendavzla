@@ -16,6 +16,16 @@ export const categories: Category[] = [
     name: "Ropa mujer",
     description: "Ropa deportiva y casual femenina.",
   },
+  {
+    slug: "fajas",
+    name: "Fajas",
+    description: "Fajas moldeadoras y de compresión.",
+  },
+  {
+    slug: "joyas",
+    name: "Joyas",
+    description: "Joyería en oro 18k y plata 925.",
+  },
 ];
 
 export function getCategory(slug: string) {

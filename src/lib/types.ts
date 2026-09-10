@@ -1,7 +1,9 @@
 export type CategorySlug =
   | "belleza"
   | "salud-y-cuidado-personal"
-  | "ropa-mujer";
+  | "ropa-mujer"
+  | "joyas"
+  | "fajas";
 
 export interface Category {
   slug: CategorySlug;
