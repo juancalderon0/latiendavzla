@@ -37,6 +37,14 @@ const slides = [
     href: "/productos?categoria=salud-y-cuidado-personal",
     cta: "Ver salud y cuidado personal",
   },
+  {
+    id: "soma",
+    image: "/soma/soma-sculpt.webp",
+    eyebrow: "SOMA",
+    title: "Esculpe tu cuerpo desde adentro",
+    href: "/productos?categoria=salud-y-cuidado-personal",
+    cta: "Ver salud y cuidado personal",
+  },
 ];
 
 export function HeroCarousel() {
