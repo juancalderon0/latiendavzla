@@ -6,8 +6,7 @@ export const products: Product[] = [
     name: "Mindfuel",
     brand: "Mindfuel",
     category: "salud-y-bienestar",
-    // Precio de referencia (conversión aprox. del precio en COP). AJUSTA al precio real de venta en Venezuela.
-    priceUsd: 35,
+    priceUsd: 75,
     shortDescription:
       "Bebida nootrópica con Melena de León para enfoque y energía sostenida, sin azúcar ni cafeína.",
     description:

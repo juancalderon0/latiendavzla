@@ -1,4 +1,4 @@
-import { PAGO_MOVIL, STORE, ZELLE } from "@/lib/config";
+import { BINANCE, PAGO_MOVIL, STORE, TRANSFERENCIA, ZELLE } from "@/lib/config";
 import { PaymentMethod, PaymentResult } from "./types";
 
 export const manualPaymentMethods: PaymentMethod[] = [
@@ -20,6 +20,27 @@ export const manualPaymentMethods: PaymentMethod[] = [
     instructions: [
       `Correo: ${ZELLE.email}`,
       `Titular: ${ZELLE.titular}`,
+      `Envía el comprobante por WhatsApp al +${STORE.whatsapp} para confirmar tu pedido.`,
+    ],
+  },
+  {
+    id: "binance",
+    name: "Binance Pay",
+    description: "Pago en criptomonedas (USDT) vía Binance Pay.",
+    instructions: [
+      `Correo Binance: ${BINANCE.email}`,
+      `Envía el comprobante por WhatsApp al +${STORE.whatsapp} para confirmar tu pedido.`,
+    ],
+  },
+  {
+    id: "transferencia",
+    name: "Transferencia bancaria nacional",
+    description: "Transferencia directa a cuenta corriente en bolívares.",
+    instructions: [
+      `Banco: ${TRANSFERENCIA.banco}`,
+      `Tipo de cuenta: ${TRANSFERENCIA.tipoCuenta}`,
+      `N° de cuenta: ${TRANSFERENCIA.numeroCuenta}`,
+      `Cédula: ${TRANSFERENCIA.cedula}`,
       `Envía el comprobante por WhatsApp al +${STORE.whatsapp} para confirmar tu pedido.`,
     ],
   },
