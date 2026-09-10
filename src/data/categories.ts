@@ -26,6 +26,11 @@ export const categories: Category[] = [
     name: "Curiosidades",
     description: "Productos únicos y fuera de lo común.",
   },
+  {
+    slug: "ropa-mujer",
+    name: "Ropa mujer",
+    description: "Ropa deportiva y casual femenina.",
+  },
 ];
 
 export function getCategory(slug: string) {

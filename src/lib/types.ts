@@ -3,7 +3,8 @@ export type CategorySlug =
   | "tecnologia"
   | "cuidado-personal"
   | "curiosidades"
-  | "salud-y-bienestar";
+  | "salud-y-bienestar"
+  | "ropa-mujer";
 
 export interface Category {
   slug: CategorySlug;
