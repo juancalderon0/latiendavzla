@@ -8,11 +8,13 @@ import { manualPaymentMethods } from "@/lib/payments/manual";
 import { STORE } from "@/lib/config";
 
 export default function CheckoutPage() {
-  const { lines, totalUsd } = useCart();
+  const { lines, totalUsd, clear } = useCart();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [methodId, setMethodId] = useState(manualPaymentMethods[0]?.id ?? "");
+  const [instagram, setInstagram] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   const method = manualPaymentMethods.find((m) => m.id === methodId);
 
@@ -32,26 +34,61 @@ export default function CheckoutPage() {
 
   const canConfirm = name.trim() && phone.trim() && address.trim() && method;
 
-  const orderText = [
-    `Hola, quiero confirmar mi pedido en ${STORE.name}:`,
-    "",
-    ...lines.map(
-      (l) => `- ${l.product.name} x${l.quantity} — ${formatUsd(l.subtotal)}`
-    ),
-    "",
-    `Total: ${formatUsd(totalUsd)}`,
-    `Método de pago: ${method?.name ?? ""}`,
-    "",
-    `Nombre: ${name}`,
-    `Teléfono: ${phone}`,
-    `Dirección de entrega: ${address}`,
-    "",
-    "Adjunto el comprobante de pago.",
-  ].join("\n");
+  async function handleConfirm() {
+    if (!canConfirm || submitting) return;
+    setSubmitting(true);
 
-  const whatsappHref = `https://wa.me/${STORE.whatsapp}?text=${encodeURIComponent(
-    orderText
-  )}`;
+    let orderId: number | null = null;
+    try {
+      const res = await fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          phone,
+          address,
+          paymentMethod: method!.name,
+          totalUsd,
+          instagramHandle: instagram.trim() || null,
+          items: lines.map((l) => ({
+            slug: l.item.slug,
+            name: l.item.name,
+            priceUsd: l.item.priceUsd,
+            quantity: l.item.quantity,
+          })),
+        }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        orderId = data.id;
+      }
+    } catch {
+      // Si falla, igual dejamos que el mensaje de WhatsApp salga sin el link de seguimiento.
+    }
+
+    const orderText = [
+      `Hola, quiero confirmar mi pedido en ${STORE.name}:`,
+      "",
+      ...lines.map(
+        (l) => `- ${l.item.name} x${l.item.quantity} — ${formatUsd(l.item.priceUsd * l.item.quantity)}`
+      ),
+      "",
+      `Total: ${formatUsd(totalUsd)}`,
+      `Método de pago: ${method!.name}`,
+      "",
+      `Nombre: ${name}`,
+      `Teléfono: ${phone}`,
+      `Dirección de entrega: ${address}`,
+      "",
+      "Adjunto el comprobante de pago.",
+      ...(orderId ? ["", `Confirmar en el panel: ${window.location.origin}/admin/pedidos/${orderId}`] : []),
+    ].join("\n");
+
+    const whatsappHref = `https://wa.me/${STORE.whatsapp}?text=${encodeURIComponent(orderText)}`;
+    window.open(whatsappHref, "_blank");
+    clear();
+    setSubmitting(false);
+  }
 
   return (
     <div className="mx-auto grid w-full max-w-4xl gap-8 px-4 py-10 md:grid-cols-3">
@@ -79,6 +116,31 @@ export default function CheckoutPage() {
             rows={3}
             className="rounded-lg border border-black/15 px-4 py-2 text-sm"
           />
+        </div>
+
+        <div className="rounded-2xl bg-gradient-to-r from-fuchsia-600 to-purple-600 p-5 text-white">
+          <h3 className="font-bold">🎁 ¿Quieres ganar premios y descuentos?</h3>
+          <p className="mt-1 text-sm text-white/85">
+            Síguenos en Instagram y déjanos tu usuario — participas por
+            productos, descuentos y sorpresas exclusivas para seguidores.
+          </p>
+          <div className="mt-3 flex flex-col gap-2 sm:flex-row">
+            <input
+              value={instagram}
+              onChange={(e) => setInstagram(e.target.value)}
+              placeholder="@tu_usuario_de_instagram"
+              className="flex-1 rounded-lg border border-white/30 bg-white/10 px-4 py-2 text-sm text-white placeholder-white/60 outline-none focus:bg-white/20"
+            />
+            <a
+              href={STORE.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-lg bg-white px-4 py-2 text-center text-sm font-semibold text-fuchsia-700 hover:bg-white/90"
+            >
+              Síguenos
+            </a>
+          </div>
+          <p className="mt-2 text-xs text-white/60">Opcional — solo si quieres participar.</p>
         </div>
 
         <div className="flex flex-col gap-3">
@@ -124,9 +186,9 @@ export default function CheckoutPage() {
         <h2 className="mb-4 font-semibold">Resumen</h2>
         <div className="flex flex-col gap-2 text-sm">
           {lines.map((l) => (
-            <div key={l.product.slug} className="flex justify-between">
+            <div key={l.item.slug} className="flex justify-between">
               <span>
-                {l.product.name} x{l.quantity}
+                {l.item.name} x{l.item.quantity}
               </span>
               <span>{formatUsd(l.subtotal)}</span>
             </div>
@@ -138,14 +200,13 @@ export default function CheckoutPage() {
         </div>
 
         {canConfirm ? (
-          <a
-            href={whatsappHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6 block rounded-full bg-green-600 px-6 py-3 text-center text-sm font-semibold text-white hover:bg-green-700"
+          <button
+            onClick={handleConfirm}
+            disabled={submitting}
+            className="mt-6 block w-full rounded-full bg-green-600 px-6 py-3 text-center text-sm font-semibold text-white hover:bg-green-700 disabled:opacity-50"
           >
-            Confirmar pedido por WhatsApp
-          </a>
+            {submitting ? "Creando pedido..." : "Confirmar pedido por WhatsApp"}
+          </button>
         ) : (
           <button
             disabled

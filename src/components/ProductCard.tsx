@@ -26,7 +26,14 @@ export function ProductCard({ product }: { product: Product }) {
         <p className="line-clamp-2 text-sm text-black/60">
           {product.shortDescription}
         </p>
-        <div className="mt-auto pt-3 font-bold">{formatUsd(product.priceUsd)}</div>
+        <div className="mt-auto flex items-baseline gap-2 pt-3">
+          <span className="font-bold">{formatUsd(product.priceUsd)}</span>
+          {product.originalPriceUsd && (
+            <span className="text-xs text-black/40 line-through">
+              {formatUsd(product.originalPriceUsd)}
+            </span>
+          )}
+        </div>
       </div>
     </Link>
   );

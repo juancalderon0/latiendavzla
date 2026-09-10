@@ -9,15 +9,14 @@ import {
   ReactNode,
 } from "react";
 import { CartItem, Product } from "@/lib/types";
-import { getProduct } from "@/data/products";
 
 interface CartContextValue {
   items: CartItem[];
-  addItem: (slug: string, quantity?: number) => void;
+  addItem: (product: Product, quantity?: number) => void;
   removeItem: (slug: string) => void;
   setQuantity: (slug: string, quantity: number) => void;
   clear: () => void;
-  lines: { product: Product; quantity: number; subtotal: number }[];
+  lines: { item: CartItem; subtotal: number }[];
   totalItems: number;
   totalUsd: number;
 }
@@ -48,15 +47,24 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   }, [items, hydrated]);
 
-  function addItem(slug: string, quantity = 1) {
+  function addItem(product: Product, quantity = 1) {
     setItems((prev) => {
-      const existing = prev.find((i) => i.slug === slug);
+      const existing = prev.find((i) => i.slug === product.slug);
       if (existing) {
         return prev.map((i) =>
-          i.slug === slug ? { ...i, quantity: i.quantity + quantity } : i
+          i.slug === product.slug ? { ...i, quantity: i.quantity + quantity } : i
         );
       }
-      return [...prev, { slug, quantity }];
+      return [
+        ...prev,
+        {
+          slug: product.slug,
+          name: product.name,
+          image: product.image,
+          priceUsd: product.priceUsd,
+          quantity,
+        },
+      ];
     });
   }
 
@@ -76,22 +84,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }
 
   const lines = useMemo(
-    () =>
-      items
-        .map((item) => {
-          const product = getProduct(item.slug);
-          if (!product) return null;
-          return {
-            product,
-            quantity: item.quantity,
-            subtotal: product.priceUsd * item.quantity,
-          };
-        })
-        .filter((l): l is NonNullable<typeof l> => l !== null),
+    () => items.map((item) => ({ item, subtotal: item.priceUsd * item.quantity })),
     [items]
   );
 
-  const totalItems = lines.reduce((sum, l) => sum + l.quantity, 0);
+  const totalItems = lines.reduce((sum, l) => sum + l.item.quantity, 0);
   const totalUsd = lines.reduce((sum, l) => sum + l.subtotal, 0);
 
   return (

@@ -1,13 +1,11 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { getProduct, products } from "@/data/products";
+import { getProductBySlug } from "@/lib/products-db";
 import { getCategory } from "@/data/categories";
 import { formatUsd } from "@/lib/format";
 import { AddToCartButton } from "@/components/AddToCartButton";
 
-export function generateStaticParams() {
-  return products.map((p) => ({ slug: p.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export default async function ProductoPage({
   params,
@@ -15,7 +13,7 @@ export default async function ProductoPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const product = getProduct(slug);
+  const product = await getProductBySlug(slug);
   if (!product) notFound();
 
   const category = getCategory(product.category);
@@ -40,9 +38,16 @@ export default async function ProductoPage({
         )}
         <h1 className="text-3xl font-bold">{product.name}</h1>
         <p className="text-black/60">{product.shortDescription}</p>
-        <div className="text-2xl font-bold">{formatUsd(product.priceUsd)}</div>
+        <div className="flex items-baseline gap-2">
+          <span className="text-2xl font-bold">{formatUsd(product.priceUsd)}</span>
+          {product.originalPriceUsd && (
+            <span className="text-lg text-black/40 line-through">
+              {formatUsd(product.originalPriceUsd)}
+            </span>
+          )}
+        </div>
 
-        <AddToCartButton slug={product.slug} />
+        <AddToCartButton product={product} />
 
         <div className="mt-4 space-y-4 border-t border-black/10 pt-4 text-sm">
           <p>{product.description}</p>

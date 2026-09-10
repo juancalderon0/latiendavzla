@@ -1,12 +1,15 @@
 import Link from "next/link";
 import { categories } from "@/data/categories";
-import { products } from "@/data/products";
+import { getAllProducts } from "@/lib/products-db";
 import { ProductCard } from "@/components/ProductCard";
 import { FeaturedBrands } from "@/components/FeaturedBrands";
 import { PromoBanners } from "@/components/PromoBanners";
 import { HeroCarousel } from "@/components/HeroCarousel";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const products = await getAllProducts();
   const destacados = products.slice(0, 8);
 
   return (

@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { categories } from "@/data/categories";
-import { products } from "@/data/products";
+import { getAllProducts, getProductsByCategory } from "@/lib/products-db";
 import { ProductCard } from "@/components/ProductCard";
+
+export const dynamic = "force-dynamic";
 
 export default async function ProductosPage({
   searchParams,
@@ -10,8 +12,8 @@ export default async function ProductosPage({
 }) {
   const { categoria } = await searchParams;
   const filtered = categoria
-    ? products.filter((p) => p.category === categoria)
-    : products;
+    ? await getProductsByCategory(categoria)
+    : await getAllProducts();
 
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-10">

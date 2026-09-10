@@ -27,15 +27,15 @@ export default function CarritoPage() {
       <div className="md:col-span-2">
         <h1 className="mb-6 text-2xl font-bold">Tu carrito</h1>
         <div className="flex flex-col gap-4">
-          {lines.map(({ product, quantity, subtotal }) => (
+          {lines.map(({ item, subtotal }) => (
             <div
-              key={product.slug}
+              key={item.slug}
               className="flex gap-4 rounded-xl border border-black/10 p-4"
             >
               <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg bg-neutral-100">
                 <Image
-                  src={product.image}
-                  alt={product.name}
+                  src={item.image}
+                  alt={item.name}
                   fill
                   className="object-cover"
                 />
@@ -43,13 +43,13 @@ export default function CarritoPage() {
               <div className="flex flex-1 flex-col justify-between">
                 <div className="flex items-start justify-between gap-2">
                   <Link
-                    href={`/productos/${product.slug}`}
+                    href={`/productos/${item.slug}`}
                     className="font-medium hover:underline"
                   >
-                    {product.name}
+                    {item.name}
                   </Link>
                   <button
-                    onClick={() => removeItem(product.slug)}
+                    onClick={() => removeItem(item.slug)}
                     className="text-xs text-black/40 hover:text-red-600"
                   >
                     Quitar
@@ -58,14 +58,14 @@ export default function CarritoPage() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <button
-                      onClick={() => setQuantity(product.slug, quantity - 1)}
+                      onClick={() => setQuantity(item.slug, item.quantity - 1)}
                       className="h-7 w-7 rounded-full border border-black/20 hover:bg-black/5"
                     >
                       −
                     </button>
-                    <span className="w-6 text-center text-sm">{quantity}</span>
+                    <span className="w-6 text-center text-sm">{item.quantity}</span>
                     <button
-                      onClick={() => setQuantity(product.slug, quantity + 1)}
+                      onClick={() => setQuantity(item.slug, item.quantity + 1)}
                       className="h-7 w-7 rounded-full border border-black/20 hover:bg-black/5"
                     >
                       +

@@ -17,6 +17,7 @@ export interface Product {
   brand: string;
   category: CategorySlug;
   priceUsd: number;
+  originalPriceUsd?: number;
   shortDescription: string;
   description: string;
   highlights: string[];
@@ -27,5 +28,8 @@ export interface Product {
 
 export interface CartItem {
   slug: string;
+  name: string;
+  image: string;
+  priceUsd: number;
   quantity: number;
 }

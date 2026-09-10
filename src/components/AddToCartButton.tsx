@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/lib/cart-context";
+import { Product } from "@/lib/types";
 
-export function AddToCartButton({ slug }: { slug: string }) {
+export function AddToCartButton({ product }: { product: Product }) {
   const { addItem } = useCart();
   const [added, setAdded] = useState(false);
   const router = useRouter();
@@ -13,7 +14,7 @@ export function AddToCartButton({ slug }: { slug: string }) {
     <div className="flex flex-col gap-3 sm:flex-row">
       <button
         onClick={() => {
-          addItem(slug);
+          addItem(product);
           setAdded(true);
           setTimeout(() => setAdded(false), 1500);
         }}
@@ -23,7 +24,7 @@ export function AddToCartButton({ slug }: { slug: string }) {
       </button>
       <button
         onClick={() => {
-          addItem(slug);
+          addItem(product);
           router.push("/carrito");
         }}
         className="rounded-full border border-black/20 px-6 py-3 text-sm font-semibold hover:bg-black/5"

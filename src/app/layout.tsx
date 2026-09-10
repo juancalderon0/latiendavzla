@@ -5,6 +5,7 @@ import { CartProvider } from "@/lib/cart-context";
 import { Header } from "@/components/Header";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { SocialLinks } from "@/components/SocialLinks";
+import { StorefrontOnly } from "@/components/StorefrontOnly";
 import { STORE } from "@/lib/config";
 
 const geistSans = Geist({
@@ -35,15 +36,19 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col bg-white text-black">
         <CartProvider>
-          <Header />
+          <StorefrontOnly>
+            <Header />
+          </StorefrontOnly>
           <main className="flex flex-1 flex-col pb-20 sm:pb-0">{children}</main>
-          <footer className="border-t border-black/10 py-8 text-center text-xs text-black/50">
-            <div className="mb-4">
-              <SocialLinks />
-            </div>
-            © {new Date().getFullYear()} {STORE.name}. Todos los derechos reservados.
-          </footer>
-          <WhatsAppButton />
+          <StorefrontOnly>
+            <footer className="border-t border-black/10 py-8 text-center text-xs text-black/50">
+              <div className="mb-4">
+                <SocialLinks />
+              </div>
+              © {new Date().getFullYear()} {STORE.name}. Todos los derechos reservados.
+            </footer>
+            <WhatsAppButton />
+          </StorefrontOnly>
         </CartProvider>
       </body>
     </html>
