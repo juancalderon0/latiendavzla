@@ -2,7 +2,7 @@
 export const STORE = {
   name: "La Tienda VZLA",
   whatsapp: "584123104724",
-  instagram: "https://instagram.com/tuusuario", // TODO
+  instagram: "https://instagram.com/iconovisual",
   currency: "USD",
 };
 

@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/lib/cart-context";
 import { Header } from "@/components/Header";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { STORE } from "@/lib/config";
 
 const geistSans = Geist({
@@ -32,8 +33,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Header />
           <main className="flex flex-1 flex-col">{children}</main>
           <footer className="border-t border-black/10 py-8 text-center text-xs text-black/50">
+            <a
+              href={STORE.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mb-2 block font-medium text-black/70 hover:text-black"
+            >
+              Síguenos en Instagram
+            </a>
             © {new Date().getFullYear()} {STORE.name}. Todos los derechos reservados.
           </footer>
+          <WhatsAppButton />
         </CartProvider>
       </body>
     </html>
