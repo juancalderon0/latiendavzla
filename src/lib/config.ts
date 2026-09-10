@@ -3,6 +3,8 @@ export const STORE = {
   name: "La Tienda VZLA",
   whatsapp: "584123104724",
   instagram: "https://instagram.com/iconovisual",
+  facebook: "https://facebook.com/tuusuario", // TODO: pon tu link real
+  tiktok: "https://tiktok.com/@tuusuario", // TODO: pon tu link real
   currency: "USD",
 };
 

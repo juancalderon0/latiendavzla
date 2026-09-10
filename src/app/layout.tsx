@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/lib/cart-context";
 import { Header } from "@/components/Header";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { SocialLinks } from "@/components/SocialLinks";
 import { STORE } from "@/lib/config";
 
 const geistSans = Geist({
@@ -22,6 +23,10 @@ export const metadata: Metadata = {
     "Belleza, salud y cuidado personal, y ropa mujer, con envíos en Venezuela.",
 };
 
+export const viewport: Viewport = {
+  colorScheme: "light",
+};
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
@@ -33,14 +38,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Header />
           <main className="flex flex-1 flex-col pb-20 sm:pb-0">{children}</main>
           <footer className="border-t border-black/10 py-8 text-center text-xs text-black/50">
-            <a
-              href={STORE.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mb-2 block font-medium text-black/70 hover:text-black"
-            >
-              Síguenos en Instagram
-            </a>
+            <div className="mb-4">
+              <SocialLinks />
+            </div>
             © {new Date().getFullYear()} {STORE.name}. Todos los derechos reservados.
           </footer>
           <WhatsAppButton />

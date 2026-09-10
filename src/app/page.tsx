@@ -33,14 +33,14 @@ export default function Home() {
 
       <section className="mx-auto w-full max-w-6xl px-4 pb-12">
         <h2 className="mb-6 text-lg font-semibold">Categorías</h2>
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-6">
+        <div className="grid grid-cols-3 gap-3 sm:gap-4">
           {categories.map((c) => (
             <Link
               key={c.slug}
               href={`/productos?categoria=${c.slug}`}
-              className="rounded-xl border border-black/10 p-4 text-center transition hover:border-black/30 hover:bg-black/5"
+              className="flex min-h-20 items-center justify-center rounded-xl border border-black/10 p-3 text-center text-sm transition hover:border-black/30 hover:bg-black/5 sm:min-h-24 sm:p-4 sm:text-base"
             >
-              <div className="font-medium">{c.name}</div>
+              <span className="font-medium leading-tight">{c.name}</span>
             </Link>
           ))}
         </div>
