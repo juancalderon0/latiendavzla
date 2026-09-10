@@ -2,8 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { Product } from "@/lib/types";
 import { formatUsd } from "@/lib/format";
+import { formatBs } from "@/lib/bcv";
 
-export function ProductCard({ product }: { product: Product }) {
+export function ProductCard({ product, bcvRate }: { product: Product; bcvRate?: number | null }) {
   return (
     <Link
       href={`/productos/${product.slug}`}
@@ -26,12 +27,17 @@ export function ProductCard({ product }: { product: Product }) {
         <p className="line-clamp-2 text-sm text-black/60">
           {product.shortDescription}
         </p>
-        <div className="mt-auto flex items-baseline gap-2 pt-3">
-          <span className="font-bold">{formatUsd(product.priceUsd)}</span>
-          {product.originalPriceUsd && (
-            <span className="text-xs text-black/40 line-through">
-              {formatUsd(product.originalPriceUsd)}
-            </span>
+        <div className="mt-auto pt-3">
+          <div className="flex items-baseline gap-2">
+            <span className="font-bold">{formatUsd(product.priceUsd)}</span>
+            {product.originalPriceUsd && (
+              <span className="text-xs text-black/40 line-through">
+                {formatUsd(product.originalPriceUsd)}
+              </span>
+            )}
+          </div>
+          {bcvRate && (
+            <div className="text-xs text-black/50">{formatBs(product.priceUsd, bcvRate)}</div>
           )}
         </div>
       </div>

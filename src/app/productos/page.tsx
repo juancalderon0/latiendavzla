@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { categories } from "@/data/categories";
 import { getAllProducts, getProductsByCategory } from "@/lib/products-db";
+import { getBcvRate } from "@/lib/bcv";
 import { ProductCard } from "@/components/ProductCard";
 
 export const dynamic = "force-dynamic";
@@ -11,9 +12,10 @@ export default async function ProductosPage({
   searchParams: Promise<{ categoria?: string }>;
 }) {
   const { categoria } = await searchParams;
-  const filtered = categoria
-    ? await getProductsByCategory(categoria)
-    : await getAllProducts();
+  const [filtered, bcvRate] = await Promise.all([
+    categoria ? getProductsByCategory(categoria) : getAllProducts(),
+    getBcvRate(),
+  ]);
 
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-10">
@@ -52,7 +54,7 @@ export default async function ProductosPage({
       ) : (
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
           {filtered.map((p) => (
-            <ProductCard key={p.slug} product={p} />
+            <ProductCard key={p.slug} product={p} bcvRate={bcvRate} />
           ))}
         </div>
       )}

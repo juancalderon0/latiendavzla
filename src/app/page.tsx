@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { categories } from "@/data/categories";
 import { getAllProducts } from "@/lib/products-db";
+import { getBcvRate } from "@/lib/bcv";
 import { ProductCard } from "@/components/ProductCard";
 import { FeaturedBrands } from "@/components/FeaturedBrands";
 import { PromoBanners } from "@/components/PromoBanners";
@@ -9,7 +10,7 @@ import { HeroCarousel } from "@/components/HeroCarousel";
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const products = await getAllProducts();
+  const [products, bcvRate] = await Promise.all([getAllProducts(), getBcvRate()]);
   const destacados = products.slice(0, 8);
 
   return (
@@ -44,7 +45,7 @@ export default async function Home() {
         </div>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
           {destacados.map((p) => (
-            <ProductCard key={p.slug} product={p} />
+            <ProductCard key={p.slug} product={p} bcvRate={bcvRate} />
           ))}
         </div>
       </section>

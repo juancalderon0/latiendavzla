@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getProductBySlug } from "@/lib/products-db";
 import { getCategory } from "@/data/categories";
 import { formatUsd } from "@/lib/format";
+import { getBcvRate, formatBs } from "@/lib/bcv";
 import { AddToCartButton } from "@/components/AddToCartButton";
 
 export const dynamic = "force-dynamic";
@@ -13,7 +14,7 @@ export default async function ProductoPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const product = await getProductBySlug(slug);
+  const [product, bcvRate] = await Promise.all([getProductBySlug(slug), getBcvRate()]);
   if (!product) notFound();
 
   const category = getCategory(product.category);
@@ -38,12 +39,19 @@ export default async function ProductoPage({
         )}
         <h1 className="text-3xl font-bold">{product.name}</h1>
         <p className="text-black/60">{product.shortDescription}</p>
-        <div className="flex items-baseline gap-2">
-          <span className="text-2xl font-bold">{formatUsd(product.priceUsd)}</span>
-          {product.originalPriceUsd && (
-            <span className="text-lg text-black/40 line-through">
-              {formatUsd(product.originalPriceUsd)}
-            </span>
+        <div>
+          <div className="flex items-baseline gap-2">
+            <span className="text-2xl font-bold">{formatUsd(product.priceUsd)}</span>
+            {product.originalPriceUsd && (
+              <span className="text-lg text-black/40 line-through">
+                {formatUsd(product.originalPriceUsd)}
+              </span>
+            )}
+          </div>
+          {bcvRate && (
+            <p className="text-sm text-black/50">
+              {formatBs(product.priceUsd, bcvRate)} · Tasa BCV: {bcvRate.toFixed(2)} Bs/USD
+            </p>
           )}
         </div>
 
