@@ -42,9 +42,19 @@ export async function POST(
       );
     }
 
+    let commissionUsd: number | null = null;
+    if (order.seller_id) {
+      const sellerRes = await client.query<{ commission_pct: string }>(
+        `SELECT commission_pct FROM sellers WHERE id = $1`,
+        [order.seller_id]
+      );
+      const pct = Number(sellerRes.rows[0]?.commission_pct ?? 0);
+      commissionUsd = Math.round(Number(order.total_usd) * (pct / 100) * 100) / 100;
+    }
+
     await client.query(
-      `UPDATE orders SET status = 'confirmed', confirmed_at = now() WHERE id = $1`,
-      [id]
+      `UPDATE orders SET status = 'confirmed', confirmed_at = now(), commission_usd = $2 WHERE id = $1`,
+      [id, commissionUsd]
     );
 
     await client.query(

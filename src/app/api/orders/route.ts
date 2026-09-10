@@ -15,15 +15,26 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Faltan datos" }, { status: 400 });
   }
 
+  const refCode = req.cookies.get("ref_code")?.value ?? null;
+
   const client = await pool.connect();
   try {
     await client.query("BEGIN");
 
+    let sellerId: number | null = null;
+    if (refCode) {
+      const sellerRes = await client.query<{ id: number }>(
+        `SELECT id FROM sellers WHERE referral_code = $1 AND active = true`,
+        [refCode]
+      );
+      sellerId = sellerRes.rows[0]?.id ?? null;
+    }
+
     const orderRes = await client.query<{ id: number }>(
-      `INSERT INTO orders (status, customer_name, customer_phone, customer_address, payment_method, total_usd, instagram_handle)
-       VALUES ('pending', $1, $2, $3, $4, $5, $6)
+      `INSERT INTO orders (status, customer_name, customer_phone, customer_address, payment_method, total_usd, instagram_handle, seller_id)
+       VALUES ('pending', $1, $2, $3, $4, $5, $6, $7)
        RETURNING id`,
-      [name, phone, address, paymentMethod, totalUsd, instagramHandle || null]
+      [name, phone, address, paymentMethod, totalUsd, instagramHandle || null, sellerId]
     );
     const orderId = orderRes.rows[0].id;
 
