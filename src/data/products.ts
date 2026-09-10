@@ -27,7 +27,7 @@ export const products: Product[] = [
     name: "Set short y sesgo en contraste vainilla",
     brand: "Nobrand",
     category: "ropa-mujer",
-    priceUsd: 35,
+    priceUsd: 70,
     shortDescription: "Set deportivo de top y short en tela seamless con sesgo en contraste.",
     description:
       "Set deportivo de dos piezas en tela sin costuras (seamless), con acabado en sesgo de contraste. Ideal para entrenar o uso casual. Ref. C00113.",
@@ -41,7 +41,7 @@ export const products: Product[] = [
     name: "Set blusa y legging sesgo aéreo",
     brand: "Nobrand",
     category: "ropa-mujer",
-    priceUsd: 42,
+    priceUsd: 84,
     shortDescription: "Set deportivo de blusa y legging en tela aérea transpirable.",
     description:
       "Set de dos piezas: blusa y legging en tela aérea liviana y transpirable, con sesgo de diseño. Perfecto para entrenar o combinar en looks casuales. Ref. C2016P.",
@@ -55,7 +55,7 @@ export const products: Product[] = [
     name: "Buzo Ash",
     brand: "OWfit",
     category: "ropa-mujer",
-    priceUsd: 20,
+    priceUsd: 40,
     shortDescription: "Buzo deportivo negro, cómodo y versátil para el día a día.",
     description:
       "Buzo deportivo de corte relajado, en color negro. Combina comodidad y estilo para entrenar o para uso casual.",
@@ -69,7 +69,7 @@ export const products: Product[] = [
     name: "Buzo Cloudy",
     brand: "OWfit",
     category: "ropa-mujer",
-    priceUsd: 17,
+    priceUsd: 34,
     shortDescription: "Buzo deportivo en tono baby blue, ligero y cómodo.",
     description:
       "Buzo deportivo en tono baby blue, de tela ligera. Ideal para complementar looks deportivos o casuales.",
@@ -83,7 +83,7 @@ export const products: Product[] = [
     name: "T-Shirt Clay",
     brand: "OWfit",
     category: "ropa-mujer",
-    priceUsd: 18,
+    priceUsd: 36,
     shortDescription: "Camiseta deportiva básica en color verde seco.",
     description:
       "Camiseta deportiva básica, corte cómodo, en color verde seco. Un básico infaltable para el entrenamiento o el día a día.",
@@ -97,7 +97,7 @@ export const products: Product[] = [
     name: "Short Steel",
     brand: "OWfit",
     category: "ropa-mujer",
-    priceUsd: 24,
+    priceUsd: 48,
     shortDescription: "Short deportivo negro de alta compresión.",
     description:
       "Short deportivo de alta compresión en color negro, diseñado para entrenar con libertad de movimiento.",
@@ -111,7 +111,7 @@ export const products: Product[] = [
     name: "Pantalón Dune",
     brand: "OWfit",
     category: "ropa-mujer",
-    priceUsd: 37,
+    priceUsd: 74,
     shortDescription: "Pantalón deportivo negro, cómodo y versátil.",
     description:
       "Pantalón deportivo en color negro, de corte cómodo. Perfecto para entrenar o para un look casual deportivo.",
@@ -125,7 +125,7 @@ export const products: Product[] = [
     name: "Malla deportiva GF25Q224",
     brand: "Colombian Gymwear",
     category: "ropa-mujer",
-    priceUsd: 25,
+    priceUsd: 50,
     shortDescription: "Malla deportiva negra, ajuste resistente para entrenar.",
     description:
       "Malla deportiva en color negro, de ajuste resistente. Ideal para entrenamiento de alto impacto.",
@@ -139,7 +139,7 @@ export const products: Product[] = [
     name: "Malla rosada deportiva resistente",
     brand: "Colombian Gymwear",
     category: "ropa-mujer",
-    priceUsd: 25,
+    priceUsd: 50,
     shortDescription: "Malla deportiva rosada, ajuste resistente para entrenar.",
     description:
       "Malla deportiva en color rosado, de ajuste resistente. Ideal para entrenamiento de alto impacto.",
@@ -153,7 +153,7 @@ export const products: Product[] = [
     name: "Leggings negro texturizado seamless",
     brand: "Colombian Gymwear",
     category: "ropa-mujer",
-    priceUsd: 30,
+    priceUsd: 60,
     shortDescription: "Leggings seamless en negro con textura, pretina alta.",
     description:
       "Leggings sin costuras (seamless) en color negro con textura, pretina alta para mayor sujeción. Ideal para entrenar o uso casual.",
